@@ -1,75 +1,93 @@
 package roboResumeAssignment;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RoboResumeAssignment {
+	
+		//Email Pattern
+		public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		    //Validates if the email is in a standard format
+		public static boolean validate(String emailStr) {
+		        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+		        return matcher.find();
+		}
 
 	public static void main(String[] args) {
-
+//Variable declaration
 		String name;
 		String email;
-		String[] edu_achi;
-		String[] work_exp;
-		String[] skill_with_rating;
-		int num_achivements;
-		int number_experiance;
-		int number_skills;
+		String edu_achi;
+		String work_exp;
+		String skill_with_rating;
+		
 
 		Scanner scan = new Scanner(System.in);
-
-		System.out.println("Enter name: ");
+		//List of arrays for different inputs
+		ArrayList<String> listOfEducationalAchi = new ArrayList<String>();
+		ArrayList<String> listOfWorkExperiance = new ArrayList<String>();
+		ArrayList<String> listOfSkillSet = new ArrayList<String>();
+		
+		System.out.println("Enter your name: ");
 		name = scan.nextLine();
-		System.out.println("Enter email: ");
+		
+		
+		System.out.println("Enter your email: ");
 		email = scan.nextLine();
-
-		System.out.println("Enter the number of educational achivements (1 to 10)");
-		num_achivements = scan.nextInt(); // read number of element
-		// scan.nextInt(); // consume new line
-
-		edu_achi = new String[num_achivements];
-		System.out.println("Enter Educational achivements: ");
-		for (int i = 0; i <edu_achi.length; i++) {
+		while(validate(email) == false) //calls the email validation method 
+		{
+			System.out.println("please Enter a valid Email!");
+			email =scan.nextLine();
+		}
 			
-			edu_achi[i] = scan.nextLine();
-			
-		}
-
-		System.out.println("Enter the number of experiance you have (1 to 10)");
-		number_experiance = scan.nextInt();
-		work_exp = new String[number_experiance];
-		System.out.println("Enter your work Experiance: ");
-		for (int j = 0; j < work_exp.length; j++) {
-			work_exp[j] = scan.nextLine();
-		}
-
-		System.out.println("Enter your skills with rating (1 to 20)");
-		number_skills = scan.nextInt();
-		skill_with_rating = new String[number_skills];
-		System.out.println("Enter your Skill Set: ");
-		for (int k = 0; k < skill_with_rating.length; k++) {
-			skill_with_rating[k] = scan.nextLine();
-		}
+		int counter = 0;
+		System.out.println("Enter Educational achivements MAX 10: use STOP to EXIT");
+		
+		do{
+			edu_achi =scan.nextLine();
+			listOfEducationalAchi.add(edu_achi);
+			counter++;
+		}while(!edu_achi.equalsIgnoreCase("Stop") && counter <10);
+		
+		
+		System.out.println("Enter your work Experiance MAX 10: use STOP to EXIT");
+		counter=0;
+		do{
+			work_exp =scan.nextLine();
+			listOfWorkExperiance.add(work_exp);
+			counter++;
+		}while(!work_exp.equalsIgnoreCase("Stop") && counter <10);
+		
+		System.out.println("Enter your Skill Set MAX 20: use STOP to EXIT");
+		counter=0;
+		do{
+			skill_with_rating =scan.nextLine();
+			listOfSkillSet.add(skill_with_rating);
+			counter++;
+		}while(!skill_with_rating.equalsIgnoreCase("Stop") && counter <20);
+		
 		System.out.println("=============================================================");
 		System.out.println(name);
 		System.out.println(email);
 		System.out.println();
-		System.out.println("Education:");
+		System.out.println("EDUCATION:");
 
-		for (String achiv : edu_achi) {
-			System.out.println(achiv);
+		for (String edu : listOfEducationalAchi) {
+			System.out.println(edu);
 		}
 		System.out.println();
-		System.out.println("Experiance:");
+		System.out.println("EXPERIANCE:");
 		
-		for (String exp : work_exp) {
+		for (String exp : listOfWorkExperiance) {
 			System.out.println(exp);
 		}
 		System.out.println();
-		System.out.println("Skills:");
-		for (String skill : skill_with_rating) {
+		System.out.println("SKILL SETS:");
+		for (String skill : listOfSkillSet) {
 			System.out.println(skill);
 		}
-		
 
 		scan.close();
 	}
