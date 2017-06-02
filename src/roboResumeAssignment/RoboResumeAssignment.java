@@ -75,20 +75,27 @@ public class RoboResumeAssignment {
 		System.out.println("EDUCATION:");
 
 		for (String edu : listOfEducationalAchi) {
+			if(!edu.equalsIgnoreCase("stop")){
 			System.out.println(edu);
+			}
+			
 		}
 		System.out.println();
 		System.out.println("EXPERIANCE:");
 		
 		for (String exp : listOfWorkExperiance) {
+			if(!exp.equalsIgnoreCase("stop")){
 			System.out.println(exp);
+			}
 		}
 		System.out.println();
 		System.out.println("SKILL SETS:");
 		for (String skill : listOfSkillSet) {
+			if(!skill.equalsIgnoreCase("stop")){
 			System.out.println(skill);
+			}
 		}
-
+		
 		scan.close();
 	}
 
