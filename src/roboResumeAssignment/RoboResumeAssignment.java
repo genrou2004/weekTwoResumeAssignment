@@ -19,7 +19,7 @@ public class RoboResumeAssignment {
 
 		System.out.println("Enter your email: ");
 		email = scan.nextLine();
-		while (EmailValidation.validate(email) == false) // calls the email validation method
+		while (!EmailValidation.validate(email)) // calls the email validation method
 		{
 			System.out.println("please Enter a valid Email!");
 			email = scan.nextLine();
